@@ -25,7 +25,7 @@ function walkDog(){
 function cleanTheKitchen(){
     return new Promise((resolve, reject) => {
         setTimeout(()=>{
-            const cleaned=true
+            const cleaned=false 
             if(cleaned){
            resolve("Time to clean the kitchen")
         }else{
@@ -37,7 +37,7 @@ function cleanTheKitchen(){
 function takeOutTrash(){
    return new Promise((resolve, reject) => {
     setTimeout(()=>{
-        const trashedOut=false
+        const trashedOut=true
         if(trashedOut){
         resolve("Time to take out the trash")
     }else{
@@ -47,10 +47,10 @@ function takeOutTrash(){
    })
 }
 //method chaining 
-walkDog().then(value =>{console.log(value);return cleanTheKitchen()})
-         .then(value =>{console.log(value);return takeOutTrash()})
-          .then(value =>{console.log(value);console.log("You finished all the chores")}) 
-        .catch(error =>console.error(error));
+// walkDog().then(value =>{console.log(value);return cleanTheKitchen()})
+//          .then(value =>{console.log(value);return takeOutTrash()})
+//           .then(value =>{console.log(value);console.log("You finished all the chores")}) 
+//         .catch(error =>console.error(error));
           //So like literally it means that the first code 
           //will run to the next if it is only resolved,when 
           //rejected the next code does't show up 
@@ -71,3 +71,24 @@ walkDog().then(value =>{console.log(value);return cleanTheKitchen()})
 // .catch((error) => {
 //   console.error(error);
 // });
+
+
+//Use of ...Async/Await 
+async function doChores(){
+    try{
+const walkDogResult=await walkDog();
+console.log(walkDogResult);
+
+const cleanKitchenValue= await cleanTheKitchen();
+console.log(cleanKitchenValue);
+
+const takeTrashValue= await takeOutTrash();
+console.log(takeTrashValue);
+
+console.log('You are done with all the chores');
+} 
+catch(error){
+    console.error(error);
+}
+}
+doChores();
